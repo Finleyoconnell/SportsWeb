@@ -1,0 +1,32 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model School {
+  id             String  @id @default(cuid())
+  name           String
+  logo           String?
+  primaryColor   String? @map(name: "primary_color")
+  secondaryColor String? @map(name: "secondary_color")
+  games          Game[]
+
+  @@map(name: "schools")
+}
+
+model Game {
+  id       String    @id @default(cuid())
+  teams    School[]
+  location String?
+  date     DateTime?
+  sport    String
+
+  @@map(name: "games")
+}
