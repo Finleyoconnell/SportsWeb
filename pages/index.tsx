@@ -3,57 +3,42 @@ import { GetStaticProps } from "next"
 import Layout from "../components/Layout"
 import Post, { PostProps } from "../components/Post"
 import prisma from '../lib/prisma';
+import { useRouter } from "next/router";
+import { getRouteMatcher } from "next/dist/shared/lib/router/utils";
 
 
-export const getStaticProps: GetStaticProps = async () => {
-  const games = await prisma.game.findMany({
-    include: {
-      teams: {
-        select: { name: true}, 
-      },
-    },
-  })
-  const formattedGames = games.map((game) => {
-      game.date = game.date.toString();
-    return game
-  });
-  return {
-    props: { games: formattedGames },
-    revalidate: 10,
-  };
-};
+// export const getStaticProps: GetStaticProps = async () => {
+//   const games = await prisma.game.findMany({
+//     include: {
+//       teams: {
+//         select: { name: true}, 
+//       },
+//     },
+//   })
+//   const formattedGames = games.map((game) => {
+//       game.date = game.date.toString();
+//     return game
+//   });
+//   return {
+//     props: { games: formattedGames },
+//     revalidate: 10,
+//   };
+// };
 
 
-const Blog: React.FC<any> = (props) => {
-  console.log(props)
+const Home: React.FC<any> = () => {
+    const router = useRouter()
   return (
     <Layout>
       <div className="page">
-        <h1>Games</h1>
+        <h1>Home</h1>
         <main>
-          {props.games.map((game) => (
-            <div key={game.id} className="game">
-              <span>{`${game.teams[0].name} vs ${game.teams[1].name}`}</span>
-            </div>
-          ))}
+            <button onClick={()=>router.push("/games")}>Go to Games</button>
+            <button onClick={()=>router.push("/schools")}>Go to Schools</button>
         </main>
       </div>
-      <style jsx>{`
-        .game {
-          background: white;
-          transition: box-shadow 0.1s ease-in;
-        }
-
-        .game:hover {
-          box-shadow: 1px 1px 3px #aaa;
-        }
-
-        .game + .game {
-          margin-top: 2rem;
-        }
-      `}</style>
     </Layout>
   )
 }
 
-export default Blog
+export default Home

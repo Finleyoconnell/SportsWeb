@@ -59,3 +59,6 @@ const Post: React.FC<PostProps> = (props) => {
 }
 
 export default Post
+
+// npm run dev 
+// npx prisma studio
