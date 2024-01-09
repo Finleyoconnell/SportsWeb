@@ -3,6 +3,7 @@ import { GetStaticProps } from "next"
 import Layout from "../../components/Layout"
 import Post, { PostProps } from "../../components/Post"
 import prisma from '../../lib/prisma';
+import SchoolCard from "../../components/SchoolCard";
 
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -24,26 +25,10 @@ const Schools: React.FC<any> = ({schools}) => {
         <h1>Schools</h1>
         <main>
           {schools.map((school) => (
-            <div key={school.id} className="school">
-              <span>{`${school.name}`}</span>
-            </div>
+            <SchoolCard id={school.id} name={school.name}/>
           ))}
         </main>
       </div>
-      <style jsx>{`
-        .school {
-          background: white;
-          transition: box-shadow 0.1s ease-in;
-        }
-
-        .school:hover {
-          box-shadow: 1px 1px 3px #aaa;
-        }
-
-        .school + .school {
-          margin-top: 2rem;
-        }
-      `}</style>
     </Layout>
   )
 }

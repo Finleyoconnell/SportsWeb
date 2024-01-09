@@ -3,6 +3,7 @@ import { GetStaticProps } from "next"
 import Layout from "../../components/Layout"
 import Post, { PostProps } from "../../components/Post"
 import prisma from '../../lib/prisma';
+import GameCard from "../../components/GameCard";
 
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -33,9 +34,7 @@ const Games: React.FC<any> = (props) => {
         <h1>Games</h1>
         <main>
           {props.games.map((game) => (
-            <div key={game.id} className="game">
-              <span>{`${game.teams[0].name} vs ${game.teams[1].name}`}</span>
-            </div>
+            <GameCard id={game.id} team1={game.teams[0].name} team2={game.teams[1].name}/>
           ))}
         </main>
       </div>
