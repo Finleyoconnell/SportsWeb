@@ -9,11 +9,24 @@ const Header: React.FC = () => {
 
   let left = (
     <div className="left">
-      <Link href="/">
-        <a className="bold" data-active={isActive("/")}>
-          Feed
-        </a>
-      </Link>
+      <Link href="/" passHref><a><h3>Austin Area Sports</h3></a></Link>
+      <style jsx>{`
+        a {
+          text-decoration: none;
+          color: #000;
+          display: inline-block;
+        }
+      `}
+
+      </style>
+    </div>
+      
+  );
+
+  let center = (
+    <div className="center">
+      <Link href="games" passHref><a className="bold" data-active={isActive("/games")}>Games</a></Link>
+      <Link href="schools" passHref><a className="bold" data-active={isActive("/schools")}>Schools</a></Link>
       <style jsx>{`
         .bold {
           font-weight: bold;
@@ -25,27 +38,30 @@ const Header: React.FC = () => {
           display: inline-block;
         }
 
-        .left a[data-active="true"] {
+        .center a[data-active="true"] {
           color: gray;
         }
 
         a + a {
           margin-left: 1rem;
         }
+
+        .center {
+          margin-left: 3rem;
+        }
       `}</style>
     </div>
   );
 
-  let right = null;
-
   return (
     <nav>
       {left}
-      {right}
+      {center}
       <style jsx>{`
         nav {
           display: flex;
-          padding: 2rem;
+          padding: 1rem;
+          background-color: darkred;
           align-items: center;
         }
       `}</style>
