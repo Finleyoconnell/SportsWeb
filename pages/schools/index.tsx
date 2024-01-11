@@ -4,6 +4,7 @@ import Layout from "../../components/Layout"
 import Post, { PostProps } from "../../components/Post"
 import prisma from '../../lib/prisma';
 import SchoolCard from "../../components/SchoolCard";
+import CardContainer from "../../components/CardContainer";
 
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -24,9 +25,11 @@ const Schools: React.FC<any> = ({schools}) => {
       <div className="page">
         <h1>Schools</h1>
         <main>
-          {schools.map((school) => (
-            <SchoolCard id={school.id} name={school.name}/>
-          ))}
+          <CardContainer>
+            {schools.map((school) => (
+              <SchoolCard key={school.id} name={school.name}/>
+            ))}
+          </CardContainer>
         </main>
       </div>
     </Layout>

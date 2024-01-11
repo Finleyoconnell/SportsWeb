@@ -34,7 +34,7 @@ const Games: React.FC<any> = (props) => {
         <h1>Games</h1>
         <main>
           {props.games.map((game) => (
-            <GameCard id={game.id} team1={game.teams[0].name} team2={game.teams[1].name}/>
+            <GameCard key={game.id} team1={game.teams[0].name} team2={game.teams[1].name}/>
           ))}
         </main>
       </div>
