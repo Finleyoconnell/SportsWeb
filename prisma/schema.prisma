@@ -26,7 +26,16 @@ model Game {
   teams    School[]
   location String?
   date     DateTime?
-  sport    String
+  sport    Sport     @relation(fields: [sportId], references: [id])
+  sportId  String
 
   @@map(name: "games")
+}
+
+model Sport {
+  id    String @id @default(cuid())
+  name  String
+  games Game[]
+
+  @@map(name: "sports")
 }
