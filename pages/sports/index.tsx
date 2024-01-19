@@ -4,29 +4,30 @@ import Layout from "../../components/Layout"
 import prisma from '../../lib/prisma';
 import SchoolCard from "../../components/SchoolCard";
 import CardContainer from "../../components/CardContainer";
+import SportCard from "../../components/SportCard";
 
 
 export const getStaticProps: GetStaticProps = async () => {
-  const schools = await prisma.school.findMany()
+  const sports = await prisma.sport.findMany()
 
 
 
   return {
-    props: {schools},
+    props: {sports},
     revalidate: 10,
   };
 };
 
 
-const Schools: React.FC<any> = ({schools}) => {
+const Sports: React.FC<any> = ({sports}) => {
   return (
     <Layout>
       <div className="page">
-        <h1>Schools</h1>
+        <h1>Sports</h1>
         <main>
           <CardContainer>
-            {schools.map((school) => (
-              <SchoolCard key={school.id} name={school.name}/>
+            {sports.map((sport) => (
+              <SportCard key={sport.id} name={sport.name}/>
             ))}
           </CardContainer>
         </main>
@@ -35,4 +36,4 @@ const Schools: React.FC<any> = ({schools}) => {
   )
 }
 
-export default Schools
+export default Sports

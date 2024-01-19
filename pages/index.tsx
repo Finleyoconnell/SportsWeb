@@ -1,7 +1,6 @@
 import React from "react"
 import { GetStaticProps } from "next"
 import Layout from "../components/Layout"
-import Post, { PostProps } from "../components/Post"
 import prisma from '../lib/prisma';
 import { useRouter } from "next/router";
 import { getRouteMatcher } from "next/dist/shared/lib/router/utils";

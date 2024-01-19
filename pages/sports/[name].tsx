@@ -3,14 +3,34 @@ import { GetStaticProps } from "next"
 import Layout from "../../components/Layout"
 import prisma from '../../lib/prisma';
 import GameCard from "../../components/GameCard";
+import { useRouter } from "next/router";
 
 
-export const getStaticProps: GetStaticProps = async () => {
+export async function getStaticPaths(){
+  const sports = await prisma.sport.findMany()
+  const paths = sports.map((sport) => ({
+    params:{
+      name: sport.name
+    }
+  }))
+  return{
+    paths, fallback: false
+  }
+}
+
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const sport = context.params.name
   const games = await prisma.game.findMany({
     include: {
       teams: {
         select: { name: true}, 
       },
+    },
+    where:{
+        sport:{
+            name:sport.toString()
+        },
     },
   })
   const formattedGames = games.map((game) => {
@@ -25,12 +45,13 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 
-const Games: React.FC<any> = (props) => {
-  console.log(props)
+const GamesForSport: React.FC<any> = (props) => {
+  const router = useRouter()
+  const sport = router.query.name
   return (
     <Layout>
       <div className="page">
-        <h1>Games</h1>
+        <h1>{`Upcoming ${sport} Games`}</h1>
         <main>
           {props.games.map((game) => (
             <GameCard key={game.id} team1={game.teams[0].name} team2={game.teams[1].name}/>
@@ -55,4 +76,4 @@ const Games: React.FC<any> = (props) => {
   )
 }
 
-export default Games
+export default GamesForSport

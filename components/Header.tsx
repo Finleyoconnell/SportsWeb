@@ -25,8 +25,9 @@ const Header: React.FC = () => {
 
   let center = (
     <div className="center">
-      <Link href="games" passHref><a className="bold" data-active={isActive("/games")}>Games</a></Link>
-      <Link href="schools" passHref><a className="bold" data-active={isActive("/schools")}>Schools</a></Link>
+      <Link href="/games" passHref><a className="bold" data-active={isActive("/games")}>Games</a></Link>
+      <Link href="/schools" passHref><a className="bold" data-active={isActive("/schools")}>Schools</a></Link>
+      <Link href="/sports" passHref><a className="bold" data-active={isActive("/sports")}>Sports</a></Link>
       <style jsx>{`
         .bold {
           font-weight: bold;
