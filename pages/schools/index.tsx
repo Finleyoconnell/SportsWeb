@@ -26,7 +26,7 @@ const Schools: React.FC<any> = ({schools}) => {
         <main>
           <CardContainer>
             {schools.map((school) => (
-              <SchoolCard key={school.id} name={school.name}/>
+              <SchoolCard key={school.id} name={school.name} primaryColor={school.primaryColor}/>
             ))}
           </CardContainer>
         </main>
