@@ -1,11 +1,15 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 const Header: React.FC = () => {
   const router = useRouter();
   const isActive: (pathname: string) => boolean = (pathname) =>
     router.pathname === pathname;
+
+  const { data: session, status } = useSession()
+
 
   let left = (
     <div className="left">
@@ -53,6 +57,21 @@ const Header: React.FC = () => {
       `}</style>
     </div>
   );
+let right = null
+  if (status === 'loading') {
+    
+    right = (
+      <div className="right">
+        <p>Validating session ...</p>
+        <style jsx>{`
+          .right {
+            margin-left: auto;
+          }
+        `}</style>
+      </div>
+    );
+  }
+
 
   return (
     <nav>
