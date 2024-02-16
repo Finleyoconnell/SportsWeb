@@ -19,7 +19,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 
-const Sports: React.FC<any> = ({sports}) => {
+const Sports: React.FC<any> = ({sports, favoriteSports}) => {
   return (
     <Layout>
       <div className="page">
@@ -27,7 +27,7 @@ const Sports: React.FC<any> = ({sports}) => {
         <main>
           <CardContainer>
             {sports.map((sport) => (
-              <SportCard key={sport.id} name={sport.name}/>
+              <SportCard key={sport.id} name={sport.name} id={sport.id}/>
             ))}
           </CardContainer>
         </main>

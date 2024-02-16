@@ -7,7 +7,7 @@ import prisma from '../../../lib/prisma';
 const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, options);
 export default authHandler;
 
-const options = {
+export const options = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
